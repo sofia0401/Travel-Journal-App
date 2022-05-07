@@ -11,12 +11,14 @@ import useStyles from './styles';
 
 
 function App() {
+  const [currentId, setCurrentId] = useState(null);
   const classes = useStyles();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getPosts());
-  }, [dispatch]);
+  }, [currentId, dispatch]);
+
   return (
     <Container maxidh="lg">
       <AppBar className={classes.appBar} position="static" color="inherit">
@@ -25,34 +27,17 @@ function App() {
       </AppBar>
       <Grow in>
         <Container>
-          <Grid container justify='space-between' alignItems="stretch" spacing={3}>
+          <Grid container justifyContent='space-between' alignItems="stretch" spacing={3}>
             <Grid item xs={12} sm={7}>
-              <Posts />
+              <Posts setCurrentId={setCurrentId} />
             </Grid>
             <Grid item xs={12} sm={4}>
-              <Form />
+              <Form currentId={currentId} setCurrentId={setCurrentId} />
             </Grid>
           </Grid>
         </Container>
       </Grow>
     </Container>
-    // <div>
-    //   <div>
-    //     <div>Memories</div>
-    //     <img src={memories} alt="memories" height="60" width="60" />
-    //   </div>
-    //   <div>
-    //     <Posts/>
-    //   </div>
-    //   <div>
-    //     <Form/>
-    //   </div>
-    // </div>
-      // <div>
-      //   <p>
-      //     Edit <code>src/App.js</code> and save to reload.
-      //   </p>
-      // </div>
   );
 }
 
