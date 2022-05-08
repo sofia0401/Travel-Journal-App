@@ -5,7 +5,7 @@ export default makeStyles({
     height: 0,
     paddingTop: '56.25%',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    backgroundBlendMode: 'darken',
+    // backgroundBlendMode: 'darken',
   },
   border: {
     border: 'solid',
@@ -26,8 +26,12 @@ export default makeStyles({
     top: '20px',
     left: '20px',
     color: 'white',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundBlendMode: 'darken',
   },
   overlay2: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundBlendMode: 'darken',
     position: 'absolute',
     top: '20px',
     right: '20px',

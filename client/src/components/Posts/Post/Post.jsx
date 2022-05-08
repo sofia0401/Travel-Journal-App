@@ -3,6 +3,7 @@ import { Card, CardActions, CardContent, CardMedia, Button, Typography, Tooltip 
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import moment from 'moment';
 
 import useStyles from './styles';
@@ -35,18 +36,21 @@ function Post({ post, setCurrentId }) {
             </div>
             <Typography className={classes.title} variant="h5" gutterBottom>{post.title}</Typography>
             <CardContent>
-                <Typography variant="body2" color="textSecondary" gutterBottom>{post.message}</Typography>
+                <Typography variant="body2" color="textSecondary">{post.message}</Typography>
             </CardContent>
             <CardActions className={classes.cardActions}>
-                <Button size="small" color="primary" onClick={() => dispatch(likePost(post._id))}>
-                    <ThumbUpAltIcon fontSize="small" />
-                    &nbsp;Понравилось&nbsp;
+                <Button size="default" color="primary" onClick={() => dispatch(likePost(post._id))}>
+                    <FavoriteIcon fontSize="default" />
+                    &nbsp;
+                    {/* &nbsp;Понравилось&nbsp; */}
                     {post.likeCount}
                 </Button>
-                <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}>
-                    <DeleteIcon fontSize="small" />
-                    Удалить
-                </Button>
+                <Tooltip title='Удалить'>
+                    <Button size="default" color="secondary" onClick={() => dispatch(deletePost(post._id))}>
+                        <DeleteIcon fontSize="default" />
+                        {/* Удалить */}
+                    </Button>
+                </Tooltip>
             </CardActions>
         </Card>
     );
