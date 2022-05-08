@@ -18,7 +18,6 @@ if (process.env.NODE_ENV === 'production') {
     app.use(express.static('./client/build'));
     app.get('/', (req, res) => {
         res.sendFile('index.html', { root: "./client/build/"});
-        // res.sendFile('/../client/build/index.html');
     })
 } else {
     app.get('/', (req, res) => {
@@ -29,6 +28,3 @@ const PORT = process.env.PORT || 5000;
 mongoose.connect(process.env.CONNECTION_URL)
     .then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
     .catch((error) => console.error(error.message));
-
-// mongoose.set('useFindAndModify', false);
-

@@ -38,11 +38,11 @@ function Form({ currentId, setCurrentId }) {
                 className={`${classes.root} ${classes.form}`}
                 onSubmit={handleSubmit}
                 >
-                <Typography variant="h6">{currentId ? 'Editing' : 'Creating'} a memory</Typography>
+                <Typography variant="h6">{currentId ? 'Редактировать' : 'Добавить'} запись</Typography>
                 <TextField
                     name="creator"
                     variant="outlined"
-                    label="Creator"
+                    label="Создатель"
                     fullWidth
                     value={postData.creator}
                     onChange={(e) => setPostData({ ...postData, creator: e.target.value })}
@@ -50,7 +50,7 @@ function Form({ currentId, setCurrentId }) {
                 <TextField
                     name="title"
                     variant="outlined"
-                    label="Title"
+                    label="Название"
                     fullWidth
                     value={postData.title}
                     onChange={(e) => setPostData({ ...postData, title: e.target.value })}
@@ -58,7 +58,7 @@ function Form({ currentId, setCurrentId }) {
                 <TextField
                     name="message"
                     variant="outlined"
-                    label="Message"
+                    label="Заметки"
                     fullWidth
                     value={postData.message}
                     onChange={(e) => setPostData({ ...postData, message: e.target.value })}
@@ -66,7 +66,7 @@ function Form({ currentId, setCurrentId }) {
                 <TextField
                     name="tags"
                     variant="outlined"
-                    label="Tags"
+                    label="Теги (через запятую)"
                     fullWidth
                     value={postData.tags}
                     onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })}
@@ -78,8 +78,8 @@ function Form({ currentId, setCurrentId }) {
                         onDone={({base64}) => setPostData({ ...postData, selectedFile: base64 })}
                     />
                 </div>
-                <Button className={classes.buttonSubmit} variant="contained" color="primary" size="large" type="submit" fullWidth>Submit</Button>
-                <Button className={classes.buttonSubmit} variant="contained" color="secondary" size="small" onClick={clear} fullWidth>Clear</Button>
+                <Button className={classes.buttonSubmit} variant="contained" color="primary" size="large" type="submit" fullWidth>Сохранить</Button>
+                <Button className={classes.buttonSubmit} variant="contained" color="secondary" size="small" onClick={clear} fullWidth>Очистить форму</Button>
             </form>
         </Paper>
     );

@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core';
+import { Card, CardActions, CardContent, CardMedia, Button, Typography, Tooltip } from '@material-ui/core';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
@@ -21,14 +21,15 @@ function Post({ post, setCurrentId }) {
                 <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
             </div>
             <div className={classes.overlay2}>
-                <Button style={{color: 'white'}} size='small' onClick={() =>  {
-                    setCurrentId(post._id);
-                    console.log(post._id);
-                }}>
-                    <MoreHorizIcon fontSize="medium" />
-                </Button>
+                <Tooltip title='Редактировать'>
+                    <Button style={{color: 'white'}} size='small' onClick={() =>  {
+                        setCurrentId(post._id);
+                        console.log(post._id);
+                    }}>
+                        <MoreHorizIcon fontSize="medium" />
+                    </Button>
+                </Tooltip>
             </div>
-            {/* todo: add # to each tag, not just 1st */}
             <div className={classes.details}>
                 <Typography variant="body2" color="textSecondary">{post.tags?.map((tag) => `#${tag} `)}</Typography>
             </div>
@@ -39,12 +40,12 @@ function Post({ post, setCurrentId }) {
             <CardActions className={classes.cardActions}>
                 <Button size="small" color="primary" onClick={() => dispatch(likePost(post._id))}>
                     <ThumbUpAltIcon fontSize="small" />
-                    &nbsp;Like&nbsp;
+                    &nbsp;Понравилось&nbsp;
                     {post.likeCount}
                 </Button>
                 <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}>
                     <DeleteIcon fontSize="small" />
-                    Delete
+                    Удалить
                 </Button>
             </CardActions>
         </Card>
