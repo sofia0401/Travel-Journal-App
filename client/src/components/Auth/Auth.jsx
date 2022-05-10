@@ -1,20 +1,34 @@
 import React, { useState } from 'react';
 import { Avatar, Button, Paper, Grid, Typography, Container } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import useStyles from './styles';
 import Input from './Input';
+import { signIn, signUp } from '../../actions/auth';
 
+const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: ''};
 function Auth() {
     const classes = useStyles();
     const [showPassword, setShowPassword] = useState(false);
     const [isSignUp, setIsSignUp] = useState(false);
+    const [formData, setFormData] = useState(initialState);
+    const dispatch = useDispatch();
+    const history = useNavigate();
+
     const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword);
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
 
+        if (isSignUp) {
+            dispatch(signUp(formData, history));
+        } else {
+            dispatch(signIn(formData, history));
+        }
     }
-    const handleChange = () => {
-
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
     }
     const switchMode = () => {
         setIsSignUp((prevIsSignUp) => !prevIsSignUp);

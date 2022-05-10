@@ -52,5 +52,8 @@ export default makeStyles({
     padding: '0 16px 8px 16px',
     display: 'flex',
     justifyContent: 'space-between',
+    '& .MuiButton-root.Mui-disabled': {
+      color: 'white',
+    },
   },
 });

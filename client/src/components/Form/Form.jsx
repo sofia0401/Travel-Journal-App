@@ -8,10 +8,11 @@ import useStyles from './styles';
 import { createPost, updatePost } from '../../actions/posts';
 
 function Form({ currentId, setCurrentId }) {
-    const [postData, setPostData] = useState({creator: '', title: '', message: '', tags: '', selectedFile: ''});
+    const [postData, setPostData] = useState({ title: '', message: '', tags: '', selectedFile: ''});
     const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null);
     const classes = useStyles();
     const dispatch = useDispatch();
+    const user = JSON.parse(localStorage.getItem('profile'));
 
     //it's like watcher in vue, works if post has changed
     useEffect(() => {
@@ -21,15 +22,25 @@ function Form({ currentId, setCurrentId }) {
     function handleSubmit(e) {
         e.preventDefault();
         if (currentId) {
-            dispatch(updatePost(currentId, postData));
+            dispatch(updatePost(currentId, {  ...postData, name: user?.result?.name }));
         } else {
-            dispatch(createPost(postData));
+            dispatch(createPost({  ...postData, name: user?.result?.name }));
         }
         clear();
     }
     function clear() {
         setCurrentId(null);
-        setPostData({creator: '', title: '', message: '', tags: '', selectedFile: ''});
+        setPostData({ title: '', message: '', tags: '', selectedFile: ''});
+    }
+
+    if (!user?.result?.name) {
+        return (
+            <Paper className={classes.paper}>
+                <Typography variant='h6' align="center">
+                    Пожалуйста, войдите, чтобы создать пост и лайкать другие посты.
+                </Typography>
+            </Paper>
+        )
     }
     return(
         <Paper className={classes.paper}>
@@ -39,14 +50,6 @@ function Form({ currentId, setCurrentId }) {
                 onSubmit={handleSubmit}
                 >
                 <Typography variant="h6">{currentId ? 'Редактировать' : 'Добавить'} запись</Typography>
-                <TextField
-                    name="creator"
-                    variant="outlined"
-                    label="Создатель"
-                    fullWidth
-                    value={postData.creator}
-                    onChange={(e) => setPostData({ ...postData, creator: e.target.value })}
-                />
                 <TextField
                     name="title"
                     variant="outlined"
