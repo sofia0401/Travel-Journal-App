@@ -37,7 +37,7 @@ function Form({ currentId, setCurrentId }) {
         return (
             <Paper className={classes.paper}>
                 <Typography variant='h6' align="center">
-                    Пожалуйста, войдите, чтобы создать пост и лайкать другие посты.
+                    Пожалуйста, войдите, чтобы создать публикацию и реагировать на другие публикации.
                 </Typography>
             </Paper>
         )
