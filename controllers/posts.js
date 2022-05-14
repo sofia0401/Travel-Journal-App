@@ -5,7 +5,8 @@ import PostMessage from "../models/postMessage.js";
 export const getPosts = async (req, res) => {
     // returns all posts
     try {
-        const postMessages = await PostMessage.find();
+        let postMessages = await PostMessage.find();
+        postMessages = postMessages.reverse();
         res.status(200).json(postMessages);
     } catch (error) {
         res.status(404).json({ message: error.message});
